@@ -1,31 +1,40 @@
-import { Account } from './account.interface';
+import { generateUUID } from 'src/uuid.helper';
+import { AccountDto } from './dto/account.dto';
 
 export class AccountsRepository {
-  private accounts: Account[] = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Smith' },
+  private accounts: AccountDto[] = [
+    {
+      id: generateUUID(),
+      given_name: 'John',
+      family_name: 'Doe',
+      email_address: 'jdoe@mail.com',
+      note: '',
+      balance: { amount: 100, currency: 'USD' },
+    },
+    {
+      id: generateUUID(),
+      given_name: 'Jane',
+      family_name: 'Smith',
+      email_address: 'jsmithe@mail.com',
+      note: '',
+      balance: { amount: 200, currency: 'USD' },
+    },
   ];
 
-  findAll(): Account[] {
+  findAll(): AccountDto[] {
     return this.accounts;
   }
 
-  findById(id: number): Account {
+  findById(id: string): AccountDto {
     return this.accounts.find((account) => account.id === id);
   }
 
-  create(account: Account): Account {
-    const newAccount: Account = {
-      id: this.generateNewId(),
+  create(account: AccountDto): AccountDto {
+    const newAccount: AccountDto = {
+      id: generateUUID(),
       ...account,
     };
     this.accounts.push(newAccount);
     return newAccount;
-  }
-
-  private generateNewId(): number {
-    // returns current existing max id + 1
-    const existingIds = this.accounts.map((account) => account.id);
-    return Math.max(...existingIds) + 1;
   }
 }

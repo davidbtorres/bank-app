@@ -6,23 +6,22 @@ import {
   HttpStatus,
   Param,
   NotFoundException,
-  ParseIntPipe,
   Body,
 } from '@nestjs/common';
 import { AccountsRepository } from './accounts.repository';
-import { Account } from './account.interface';
+import { AccountDto } from './dto/account.dto';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsRepository: AccountsRepository) {}
 
   @Get()
-  findAll(): Account[] {
+  findAll(): AccountDto[] {
     return this.accountsRepository.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Account {
+  findOne(@Param('id') id: string): AccountDto {
     const account = this.accountsRepository.findById(id);
 
     if (!account) {
@@ -34,7 +33,7 @@ export class AccountsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED) // sets res status code to '201 Created' -> customary for successful account creation
-  createAccount(@Body() account: Account): Account {
+  createAccount(@Body() account: AccountDto): AccountDto {
     // @body decorator is used to extract data from req body
     return this.accountsRepository.create(account);
   }
