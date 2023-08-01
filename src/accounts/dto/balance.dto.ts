@@ -1,4 +1,4 @@
 export class BalanceDto {
-  readonly amount: number;
+  amount: number;
   readonly currency: string;
 }

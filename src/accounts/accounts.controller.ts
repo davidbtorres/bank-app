@@ -59,6 +59,8 @@ export class AccountsController {
       throw new NotFoundException(`Account with ID ${accountId} not found.`);
     }
 
+    account.balance.amount += transaction.amount_money.amount;
+
     const newTransaction = this.transactionsRepository.createTransaction(
       accountId,
       transaction,
