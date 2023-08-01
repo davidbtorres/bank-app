@@ -1,6 +1,8 @@
 import { generateUUID } from 'src/uuid.helper';
 import { AccountDto } from './dto/account.dto';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class AccountsRepository {
   private accounts: AccountDto[] = [
     {
