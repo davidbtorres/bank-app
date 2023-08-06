@@ -67,4 +67,53 @@ export class AccountsController {
     );
     return newTransaction;
   }
+
+  @Post(':id/transactions/withdraw')
+  @HttpCode(HttpStatus.CREATED)
+  withdrawTransaction(
+    @Param('id') accountId: string,
+    @Body() transaction: TransactionDto,
+  ): TransactionDto {
+    const account = this.accountsRepository.findById(accountId);
+    if (!account) {
+      throw new NotFoundException(`Account with ID ${accountId} not found.`);
+    }
+
+    account.balance.amount -= transaction.amount_money.amount;
+
+    const newTransaction = this.transactionsRepository.createTransaction(
+      accountId,
+      transaction,
+    );
+    return newTransaction;
+  }
+
+  @Post(':id/transactions/send')
+  @HttpCode(HttpStatus.CREATED)
+  sendTransaction(
+    @Param('id') accountId: string,
+    @Body() transaction: TransactionDto,
+  ): TransactionDto {
+    const account = this.accountsRepository.findById(accountId);
+    if (!account) {
+      throw new NotFoundException(`Account with ID ${accountId} not found.`);
+    }
+    const targetAccount = this.accountsRepository.findById(
+      transaction.target_account_id,
+    );
+    if (!targetAccount) {
+      throw new NotFoundException(
+        `Account with ID ${transaction.target_account_id} not found.`,
+      );
+    }
+
+    account.balance.amount -= transaction.amount_money.amount;
+    targetAccount.balance.amount -= transaction.amount_money.amount;
+
+    const newTransaction = this.transactionsRepository.createTransaction(
+      accountId,
+      transaction,
+    );
+    return newTransaction;
+  }
 }
