@@ -10,7 +10,7 @@ export class AccountsRepository {
       given_name: 'John',
       family_name: 'Doe',
       email_address: 'jdoe@mail.com',
-      note: '',
+      note: 'Test account',
       balance: { amount: 100, currency: 'USD' },
     },
     {
@@ -18,7 +18,7 @@ export class AccountsRepository {
       given_name: 'Jane',
       family_name: 'Smith',
       email_address: 'jsmithe@mail.com',
-      note: '',
+      note: 'Test account',
       balance: { amount: 200, currency: 'USD' },
     },
   ];
