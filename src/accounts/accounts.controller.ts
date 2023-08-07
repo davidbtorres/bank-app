@@ -10,9 +10,9 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { AccountsRepository } from './accounts.repository';
-import { TransactionsRepository } from 'src/transactions/transactions.repository';
+import { TransactionsRepository } from './../transactions/transactions.repository';
 import { AccountDto } from './dto/account.dto';
-import { TransactionDto } from 'src/transactions/dto/transaction.dto';
+import { TransactionDto } from './../transactions/dto/transaction.dto';
 
 @Controller('accounts')
 export class AccountsController {

@@ -1,4 +1,4 @@
-import { generateUUID } from 'src/uuid.helper';
+import { generateUUID } from './../uuid.helper';
 import { AccountDto } from './dto/account.dto';
 import { Injectable } from '@nestjs/common';
 
