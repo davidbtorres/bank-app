@@ -1,15 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 import { TransactionDto } from './dto/transaction.dto';
-import { TransactionsRepository } from './transactions.repository';
+import { TransactionsService } from './transactions.service';
 
 @Controller('transactions')
 export class TransactionsController {
-  constructor(
-    private readonly transactionsRepository: TransactionsRepository,
-  ) {}
+  constructor(private readonly transactionsService: TransactionsService) {}
 
   @Get()
   findAll(): TransactionDto[] {
-    return this.transactionsRepository.findAll();
+    return this.transactionsService.findAll();
   }
 }
