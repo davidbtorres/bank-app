@@ -1,4 +1,4 @@
-export class Amount_moneyDto {
+export class AmountMoneyDTO {
   readonly amount: number;
   readonly currency: string;
 }
